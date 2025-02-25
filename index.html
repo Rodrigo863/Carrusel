@@ -23,7 +23,7 @@
             border-radius: 15px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Sombra suave */
             background: white;
-            padding: 5px;
+            padding: 10px;
         }
 
         /* Imágenes del carrusel */
@@ -38,25 +38,20 @@
             height: 450px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombras suaves */
-            transition: opacity 1s ease-in-out;
         }
 
-        /* Descripción editable */
+        /* Contenedor de la descripción */
         .descripcion {
-            margin-top: 15px;
-            font-size: 18px;
-            color: white;
-        }
-
-        input {
-            width: 80%;
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 10px;
-            border: none;
-            text-align: center;
             margin-top: 10px;
+            font-size: 18px;
+            color: #333;
             background: white;
+            padding: 10px;
+            border-radius: 10px;
+            width: 400px;
+            margin: auto;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         /* Efecto de globos flotantes */
@@ -84,11 +79,6 @@
 
     <h1>🎈 ¡Feliz Cumpleaños, Mi Amor! ❤️🎂</h1>
 
-    <!-- Cuadro de texto para escribir una descripción -->
-    <div class="descripcion">
-        <input type="text" id="mensaje" placeholder="Escribe aquí tu mensaje especial..." oninput="actualizarMensaje()">
-    </div>
-
     <div class="carousel-container">
         <div class="carousel-images">
             <img src="https://rodrigo863.github.io/Carrusel/images/imagen1.jpg" alt="Imagen 1">
@@ -104,6 +94,9 @@
         </div>
     </div>
 
+    <!-- Descripción fija debajo del carrusel -->
+    <div class="descripcion" id="descripcion">Un día especial para celebrar tu vida y todo lo hermoso que eres. 💖</div>
+
     <!-- Globos flotantes -->
     <div class="balloon">🎈</div>
     <div class="balloon">🎈</div>
@@ -112,20 +105,28 @@
     <div class="balloon">🎈</div>
 
     <script>
+        let index = 0;
+        const images = document.querySelector(".carousel-images");
+        const totalImages = document.querySelectorAll(".carousel-images img").length;
+        const descripciones = [
+            "Un día especial para celebrar tu vida y todo lo hermoso que eres. 💖",
+            "Hoy es tu día, disfruta cada momento. 🎉",
+            "Eres la razón de tantas sonrisas, ¡feliz cumpleaños! 😊",
+            "Cada año a tu lado es un regalo para mí. 🎁",
+            "Mi amor por ti crece con cada cumpleaños. ❤️",
+            "Eres más increíble de lo que imaginas. ✨",
+            "Que este día esté lleno de felicidad y amor. 💕",
+            "Mereces todo lo bueno del mundo. 🌍",
+            "Hoy y siempre, eres mi persona especial. 💞",
+            "Te amo más de lo que las palabras pueden decir. 💖"
+        ];
+        
         function iniciarCarrusel() {
-            let index = 0;
-            const images = document.querySelector(".carousel-images");
-            const totalImages = document.querySelectorAll(".carousel-images img").length;
-
             setInterval(() => {
                 index = (index + 1) % totalImages;
                 images.style.transform = `translateX(-${index * 400}px)`;
+                document.getElementById("descripcion").innerText = descripciones[index]; // Cambia la descripción
             }, 5000);
-        }
-
-        function actualizarMensaje() {
-            const input = document.getElementById("mensaje");
-            document.title = `🎉 ${input.value || "Feliz Cumpleaños, Mi Amor!"} 🎂`;
         }
 
         window.onload = iniciarCarrusel;
