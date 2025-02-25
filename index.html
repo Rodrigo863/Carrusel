@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎂 Feliz Cumpleaños 🎉</title>
+    <title>🎂 Feliz Cumpleaños, Mi Amor ❤️</title>
     <style>
         /* Fondo festivo */
         body {
@@ -16,7 +16,7 @@
 
         /* Contenedor del carrusel */
         .carousel-container {
-            width: 370px;
+            width: 420px;
             margin: auto;
             overflow: hidden;
             position: relative;
@@ -29,16 +29,34 @@
         /* Imágenes del carrusel */
         .carousel-images {
             display: flex;
-            width: 3700px; /* 10 imágenes de 370px */
+            width: 4200px; /* 10 imágenes de 420px */
             transition: transform 1.2s ease-in-out;
         }
 
         .carousel-images img {
-            width: 350px;
-            height: 400px;
+            width: 400px;
+            height: 450px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombras suaves */
             transition: opacity 1s ease-in-out;
+        }
+
+        /* Descripción editable */
+        .descripcion {
+            margin-top: 15px;
+            font-size: 18px;
+            color: white;
+        }
+
+        input {
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 10px;
+            border: none;
+            text-align: center;
+            margin-top: 10px;
+            background: white;
         }
 
         /* Efecto de globos flotantes */
@@ -64,7 +82,12 @@
 </head>
 <body>
 
-    <h1>🎈 ¡Feliz Cumpleaños! 🎂🎁</h1>
+    <h1>🎈 ¡Feliz Cumpleaños, Mi Amor! ❤️🎂</h1>
+
+    <!-- Cuadro de texto para escribir una descripción -->
+    <div class="descripcion">
+        <input type="text" id="mensaje" placeholder="Escribe aquí tu mensaje especial..." oninput="actualizarMensaje()">
+    </div>
 
     <div class="carousel-container">
         <div class="carousel-images">
@@ -96,8 +119,13 @@
 
             setInterval(() => {
                 index = (index + 1) % totalImages;
-                images.style.transform = `translateX(-${index * 350}px)`;
+                images.style.transform = `translateX(-${index * 400}px)`;
             }, 5000);
+        }
+
+        function actualizarMensaje() {
+            const input = document.getElementById("mensaje");
+            document.title = `🎉 ${input.value || "Feliz Cumpleaños, Mi Amor!"} 🎂`;
         }
 
         window.onload = iniciarCarrusel;
@@ -105,3 +133,4 @@
 
 </body>
 </html>
+
