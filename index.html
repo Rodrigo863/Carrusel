@@ -22,8 +22,8 @@
         }
         .carousel-images {
             display: flex;
-            width: 900px; /* 3 imágenes de 300px */
-            transition: transform 0.5s ease-in-out;
+            width: 3000px; /* 10 imágenes de 300px */
+            transition: transform 1s ease-in-out; /* Transición más suave */
         }
         .carousel-images img {
             width: 300px;
@@ -39,7 +39,7 @@
 </head>
 <body>
 
-    <h1>Bienvenido ahora </h1>
+    <h1>Bienvenido ahora</h1>
     <button onclick="mostrarCarrusel()">Entrar</button>
 
     <div id="carousel">
@@ -60,15 +60,21 @@
     </div>
 
     <script>
-       function iniciarCarrusel() {
-    let index = 0;
-    const images = document.querySelector(".carousel-images");
-    setInterval(() => {
-        index = (index + 1) % 10; // Cambia entre las 10 imágenes
-        images.style.transform = `translateX(-${index * 300}px)`;
-    }, 5000); // Ahora se moverá cada 5 segundos
-}
+        function mostrarCarrusel() {
+            document.getElementById("carousel").style.display = "block";
+            iniciarCarrusel();
+        }
 
+        function iniciarCarrusel() {
+            let index = 0;
+            const images = document.querySelector(".carousel-images");
+            const totalImages = document.querySelectorAll(".carousel-images img").length;
+            
+            setInterval(() => {
+                index = (index + 1) % totalImages; // Cambia entre todas las imágenes
+                images.style.transform = `translateX(-${index * 300}px)`;
+            }, 5000); // Se mueve cada 5 segundos
+        }
     </script>
 
 </body>
