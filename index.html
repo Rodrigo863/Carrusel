@@ -10,7 +10,7 @@
             font-family: "Comic Sans MS", cursive, sans-serif;
             text-align: center;
             padding: 20px;
-            background: linear-gradient(to right, #ffde59, #ff914d); /* Amarillo a naranja */
+            background: linear-gradient(to right, #ffde59, #ff914d);
             color: white;
         }
 
@@ -21,7 +21,7 @@
             overflow: hidden;
             position: relative;
             border-radius: 15px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Sombra suave */
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
             background: white;
             padding: 10px;
         }
@@ -29,7 +29,7 @@
         /* Imágenes del carrusel */
         .carousel-images {
             display: flex;
-            width: 4200px; /* 10 imágenes de 420px */
+            width: 4200px;
             transition: transform 1.2s ease-in-out;
         }
 
@@ -37,7 +37,7 @@
             width: 400px;
             height: 450px;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombras suaves */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         /* Contenedor de la descripción */
@@ -54,24 +54,23 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        /* Efecto de globos flotantes */
-        @keyframes globos {
-            0% { transform: translateY(0) scale(1); opacity: 1; }
-            100% { transform: translateY(-250px) scale(1.5); opacity: 0; }
+        /* Animación final de "TE AMO" */
+        .mensaje-final {
+            font-size: 50px;
+            font-weight: bold;
+            color: red;
+            text-shadow: 3px 3px 10px white;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: opacity 2s ease-in-out, transform 2s ease-in-out;
+            margin-top: 50px;
         }
 
-        .balloon {
-            position: absolute;
-            font-size: 30px;
-            animation: globos 4s infinite linear;
+        /* Clase que se activa para mostrar "TE AMO" */
+        .mostrar-mensaje {
+            opacity: 1;
+            transform: scale(1);
         }
-
-        /* Posiciones aleatorias de los globos */
-        .balloon:nth-child(1) { left: 10%; animation-duration: 3s; }
-        .balloon:nth-child(2) { left: 30%; animation-duration: 4s; }
-        .balloon:nth-child(3) { left: 50%; animation-duration: 3.5s; }
-        .balloon:nth-child(4) { left: 70%; animation-duration: 5s; }
-        .balloon:nth-child(5) { left: 90%; animation-duration: 4.2s; }
 
     </style>
 </head>
@@ -97,35 +96,38 @@
     <!-- Descripción fija debajo del carrusel -->
     <div class="descripcion" id="descripcion">Un día especial para celebrar tu vida y todo lo hermoso que eres. 💖</div>
 
-    <!-- Globos flotantes -->
-    <div class="balloon">🎈</div>
-    <div class="balloon">🎈</div>
-    <div class="balloon">🎈</div>
-    <div class="balloon">🎈</div>
-    <div class="balloon">🎈</div>
+    <!-- Mensaje final "TE AMO" -->
+    <div class="mensaje-final" id="mensaje-final">❤️ TE AMO ❤️</div>
 
     <script>
         let index = 0;
         const images = document.querySelector(".carousel-images");
         const totalImages = document.querySelectorAll(".carousel-images img").length;
         const descripciones = [
-            "Un día único para honrar tu existencia y todo lo maravilloso que hay en ti.💖",
+            "Un día especial para celebrar tu vida y todo lo hermoso que eres. 💖",
             "Hoy es tu día, disfruta cada momento. 🎉",
-            "Eres la razón de tantas sonrisas, ¡feliz cumpleaños mi amorcito! 😊",
+            "Eres la razón de tantas sonrisas, ¡feliz cumpleaños! 😊",
             "Cada año a tu lado es un regalo para mí. 🎁",
             "Mi amor por ti crece con cada cumpleaños. ❤️",
             "Eres más increíble de lo que imaginas. ✨",
             "Que este día esté lleno de felicidad y amor. 💕",
             "Mereces todo lo bueno del mundo. 🌍",
-            "Hoy y siempre, eres mi personita especial. 💞",
+            "Hoy y siempre, eres mi persona especial. 💞",
             "Te amo más de lo que las palabras pueden decir. 💖"
         ];
-        
+
         function iniciarCarrusel() {
             setInterval(() => {
-                index = (index + 1) % totalImages;
-                images.style.transform = `translateX(-${index * 400}px)`;
-                document.getElementById("descripcion").innerText = descripciones[index]; // Cambia la descripción
+                if (index < totalImages - 1) {
+                    index++;
+                    images.style.transform = `translateX(-${index * 400}px)`;
+                    document.getElementById("descripcion").innerText = descripciones[index];
+                } else {
+                    // Cuando llega a la última imagen, muestra el mensaje "TE AMO"
+                    setTimeout(() => {
+                        document.getElementById("mensaje-final").classList.add("mostrar-mensaje");
+                    }, 1000); // Aparece 1 segundo después de la última imagen
+                }
             }, 5000);
         }
 
@@ -134,4 +136,5 @@
 
 </body>
 </html>
+
 
